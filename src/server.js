@@ -55,7 +55,7 @@ app.use(async (err, req, res, next) => {
 //routes definitions
 app.use([userRouter, cardRouter, songRouter, subscriptionRouter])
 
-mongoose.connect(process.env.MONGO_URL).then(() => {
+mongoose.connect("mongodb+srv://yorre:IqM9YuXRpmGQO1hI@cluster0.i6473.mongodb.net/saynadb?retryWrites=true&w=majority").then(() => {
     app.listen(process.env.PORT, () => {
         console.log(`Server is running on port ${process.env.PORT}`)
     })
