@@ -40,7 +40,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended:true }))
 
 app.use(expressJWT({ secret: process.env.JWT_SECRET, algorithms: ['HS256']}).unless({path:["/assets/*", "/register", "/login"]}))
-app.use(async (err, req, res, next) => {
+app.use(async (err, req, res) => {
     if (err.name === 'UnauthorizedError') 
         return res.status(401).json({ "error": true, "message": "Votre token n'est pas correct" });
     else if(req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer'){
@@ -55,10 +55,10 @@ app.use(async (err, req, res, next) => {
 //routes definitions
 app.use([userRouter, cardRouter, songRouter, subscriptionRouter])
 
-mongoose.connect("mongodb+srv://yorre:IqM9YuXRpmGQO1hI@cluster0.i6473.mongodb.net/saynadb?retryWrites=true&w=majority").then(() => {
+//mongoose.connect(process.env.MONGO_URL).then(() => {
     app.listen(process.env.PORT, () => {
         console.log(`Server is running on port ${process.env.PORT}`)
     })
-})
+//})
 
 
