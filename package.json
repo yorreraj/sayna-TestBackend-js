@@ -8,11 +8,16 @@
     "dev": "nodemon --exec babel-node src/server.js",
     "build": "babel ./src -d ./build -s",
     "migrate": "babel-node src/migration/index.js",
-    "apidoc":"apidoc -i src -o src/apidoc"
+    "apidoc": "apidoc -i src -o src/apidoc"
   },
   "author": "Yorre Rajaonarivelo",
   "license": "ISC",
   "dependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.5",
+    "@babel/node": "^7.16.5",
+    "@babel/plugin-transform-runtime": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
@@ -25,20 +30,15 @@
     "short-unique-id": "^4.4.4"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.0",
-    "@babel/core": "^7.16.5",
-    "@babel/node": "^7.16.5",
-    "@babel/plugin-transform-runtime": "^7.16.5",
-    "@babel/preset-env": "^7.16.5",
     "dotenv": "^10.0.0",
     "grunt-apidoc": "^0.11.0",
     "nodemon": "^2.0.15"
   },
-  "apidoc":{
+  "apidoc": {
     "name": "api-sayna",
     "version": "0.1.0",
     "description": "Le but de ce projet est d'évaluer les compétences en tant que développeur back-end.",
     "title": "Test Backend - Sayna",
-    "url" : ""
+    "url": ""
   }
 }
