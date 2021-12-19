@@ -4,18 +4,23 @@ import cors from "cors";
 import mongoose from "mongoose";
 import session from "express-session";
 import expressJWT from "express-jwt";
-
 import userRouter from "./routes/user.router";
 import cardRouter from "./routes/card.router";
 import songRouter from "./routes/song.router";
 import subscriptionRouter from "./routes/subscription.router";
 import TokenBlacklistModel from "./models/tokenBlacklist.model";
+import path from "path";
 
 if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config();
 }
 
 const app = express();
+
+app.use("/assets", express.static('src/apidoc/assets'));
+app.get('/',function(req,res){
+    return res.sendFile(path.join(__dirname+'/apidoc/index.html'));
+});
 
 //express session
 app.use(session({
@@ -34,7 +39,7 @@ app.use(bodyParser.json())
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended:true }))
 
-app.use(expressJWT({ secret: process.env.JWT_SECRET, algorithms: ['HS256']}).unless({path:["/register", "/login"]}))
+app.use(expressJWT({ secret: process.env.JWT_SECRET, algorithms: ['HS256']}).unless({path:["/assets/*", "/register", "/login"]}))
 app.use(async (err, req, res, next) => {
     if (err.name === 'UnauthorizedError') 
         return res.status(401).json({ "error": true, "message": "Votre token n'est pas correct" });
@@ -47,8 +52,8 @@ app.use(async (err, req, res, next) => {
     }
 });
 
-app.use("/", [userRouter, cardRouter, songRouter, subscriptionRouter])
-
+//routes definitions
+app.use([userRouter, cardRouter, songRouter, subscriptionRouter])
 
 mongoose.connect(process.env.MONGO_URL).then(() => {
     app.listen(process.env.PORT, () => {
