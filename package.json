@@ -4,7 +4,7 @@
   "description": "Test d'évaluation des compétences back-end par Sayna",
   "main": "index.js",
   "scripts": {
-    "start": "node build/migration/index.js && node build/server.js",
+    "start": "node build/server.js",
     "dev": "nodemon --exec babel-node src/server.js",
     "build": "babel ./src -d ./build -s",
     "migrate": "babel-node src/migration/index.js",

@@ -52,7 +52,7 @@ const run = () => {
             song.id = uid()
             data.push(song)        
         })  
-        await SongModel.remove();    
+        await SongModel.deleteMany();    
         await SongModel.insertMany(data);
         process.exit()
     })
