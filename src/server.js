@@ -36,19 +36,24 @@ app.use(bodyParser.json())
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended:true }))
 
-app.use("/api", expressJWT({ secret: process.env.JWT_SECRET, algorithms: ['HS256']}).unless({path:["/api/register", "/api/login"]}))
-app.use("/api", async (err, req, res, next) => {
-    if (err.name === 'UnauthorizedError') 
-        return res.status(401).json({ "error": true, "message": "Votre token n'est pas correct" });
-    else if(req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer'){
-        const token = req.headers.authorization.split(' ')[1];
-        const blacklistedToken = await TokenBlacklistModel.findOne({ token })
-        if(blacklistedToken)
+app.use("/api", 
+    expressJWT({ 
+        secret: process.env.JWT_SECRET, 
+        algorithms: ['HS256']
+    }).unless({path:["/api/register", "/api/login"]}),
+    async (req, res, next) => {
+        if(!req.user.id) 
             return res.status(401).json({ "error": true, "message": "Votre token n'est pas correct" });
-        req.token = token;
+        else if(req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer'){
+            const token = req.headers.authorization.split(' ')[1];
+            const blacklistedToken = await TokenBlacklistModel.findOne({ token })
+            if(blacklistedToken)
+                return res.status(401).json({ "error": true, "message": "Votre token n'est pas correct" });
+            req.token = token;
+        }
+        next()
     }
-    next()
-});
+)
 
 //api routes definitions
 app.use("/api", [userRouter, cardRouter, songRouter, subscriptionRouter])
