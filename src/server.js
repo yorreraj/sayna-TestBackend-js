@@ -17,7 +17,7 @@ if(process.env.NODE_ENV !== 'production'){
 
 const app = express();
 
-app.use("/assets", express.static('apidoc/assets'));
+app.use("/assets", express.static('build/apidoc/assets'));
 
 //express session
 app.use(session({
