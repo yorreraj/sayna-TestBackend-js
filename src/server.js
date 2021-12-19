@@ -36,7 +36,7 @@ app.use(bodyParser.json())
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended:true }))
 
-app.use("/api", expressJWT({ secret: process.env.JWT_SECRET, algorithms: ['HS256']}).unless({path:["/api/register", "api/login"]}))
+app.use("/api", expressJWT({ secret: process.env.JWT_SECRET, algorithms: ['HS256']}).unless({path:["/register", "/login"]}))
 app.use("/api", async (err, req, res, next) => {
     if (err.name === 'UnauthorizedError') 
         return res.status(401).json({ "error": true, "message": "Votre token n'est pas correct" });
