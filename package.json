@@ -4,11 +4,10 @@
   "description": "Test d'évaluation des compétences back-end par Sayna",
   "main": "index.js",
   "scripts": {
-    "start": "node build/server.js",
+    "start": "node build/migration/index.js && node build/server.js",
     "dev": "nodemon --exec babel-node src/server.js",
-    "build": "babel ./src -d ./build -s",
-    "migrate": "babel-node src/migration/index.js",
-    "apidoc": "apidoc -i src -o src/apidoc"
+    "build": "babel ./src -d ./build -s && apidoc -i src -o build/apidoc",
+    "migrate": "babel-node src/migration/index.js"
   },
   "author": "Yorre Rajaonarivelo",
   "license": "ISC",
@@ -18,6 +17,7 @@
     "@babel/node": "^7.16.5",
     "@babel/plugin-transform-runtime": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
+    "apidoc": "^0.50.2",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
