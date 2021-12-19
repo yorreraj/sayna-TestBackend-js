@@ -5,7 +5,7 @@ import SubscriptionModel from "../models/subscription.model";
 const router = express.Router();
 
 /**
- * @api {put} /subscription Enregistrer l'abonnement de l'utilisateur
+ * @api {put} /api/subscription Enregistrer l'abonnement de l'utilisateur
  * @apiName SaveSubscription
  * @apiGroup Subscription
  * 

@@ -50,7 +50,7 @@ app.use("/api", async (err, req, res, next) => {
     next()
 });
 
-//routes definitions
+//api routes definitions
 app.use("/api", [userRouter, cardRouter, songRouter, subscriptionRouter])
 //apidoc
 app.get('/',function(req,res){

@@ -12,7 +12,7 @@ import { ObjectId } from "mongodb";
 const router = express.Router();
 
 /**
- * @api {post} /register Créer un nouveau utilisateur
+ * @api {post} /api/register Créer un nouveau utilisateur
  * @apiName RegisterUser
  * @apiGroup User
  * 
@@ -52,7 +52,7 @@ router.post("/register", registerValidator, async (req, res) => {
 })
 
 /**
- * @api {post} /login Authentifier un utiisateur
+ * @api {post} /api/login Authentifier un utiisateur
  * @apiName Login
  * @apiGroup User
  * 
@@ -110,7 +110,7 @@ router.post("/login", async(req, res) => {
 })
 
 /**
- * @api {put} /user Mettre à jour les informations de l'utilisateur
+ * @api {put} /api/user Mettre à jour les informations de l'utilisateur
  * @apiName UpdateUser
  * @apiGroup User
  * 
@@ -130,7 +130,7 @@ router.put("/user", userupdateValidator, async (req, res) => {
 })
 
 /**
- * @api {delete} /user/off Deconnecter l'utilisateur
+ * @api {delete} /api/user/off Deconnecter l'utilisateur
  * @apiName Logout
  * @apiGroup User
  */
@@ -145,7 +145,7 @@ router.delete("/user/off", async(req, res) => {
 })
 
 /**
- * @api {delete} /user Supprimmer l'utilisateur
+ * @api {delete} /api/user Supprimmer l'utilisateur
  * @apiName DeleteUser
  * @apiGroup User
  */

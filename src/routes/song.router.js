@@ -6,7 +6,7 @@ import SongModel from "../models/song.model";
 const router = express.Router();
 
 /**
- * @api {get} /songs/:id? Recuperer les musiques
+ * @api {get} /api/songs/:id Recuperer les musiques
  * @apiName GetSongs
  * @apiGroup Song
  * 

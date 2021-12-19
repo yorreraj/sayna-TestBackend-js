@@ -5,7 +5,7 @@ import BankCardModel from "../models/bankCard.model";
 const router = express.Router();
 
 /**
- * @api {put} /user/cart Enregistrer les informations bancaire de l'utilisateur
+ * @api {put} /api/user/cart Enregistrer les informations bancaire de l'utilisateur
  * @apiName AddCard
  * @apiGroup Card
  * 
