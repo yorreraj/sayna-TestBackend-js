@@ -7,7 +7,8 @@
     "start": "node build/migration/index.js && node build/server.js",
     "dev": "nodemon --exec babel-node src/server.js",
     "build": "babel ./src -d ./build -s && apidoc -i src -o build/apidoc",
-    "migrate": "babel-node src/migration/index.js"
+    "migrate": "babel-node src/migration/index.js",
+    "apidoc":"apidoc -i src -o src/apidoc"
   },
   "author": "Yorre Rajaonarivelo",
   "license": "ISC",
