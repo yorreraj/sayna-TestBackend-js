@@ -17,9 +17,9 @@ if(process.env.NODE_ENV !== 'production'){
 
 const app = express();
 
-app.use("/assets", express.static('src/apidoc/assets'));
+app.use("/assets", express.static('apidoc/assets'));
 app.get('/',function(req,res){
-    return res.sendFile(path.join(__dirname+'/apidoc/index.html'));
+    return res.sendFile(path.join(__dirname+'apidoc/index.html'));
 });
 
 //express session

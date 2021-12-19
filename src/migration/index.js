@@ -1,6 +1,5 @@
 import ShortUniqueId from "short-unique-id";
 import SongModel from "../models/song.model";
-import mongoose from "mongoose";
 
 if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config();
@@ -45,17 +44,15 @@ const SONGS = [
 ]
 
 const run = () => {
-    mongoose.connect(process.env.MONGO_URL).then(async () => {
-        const uid = new ShortUniqueId({ length: 10 });
-        let data = []
-        SONGS.forEach(async song => {
-            song.id = uid()
-            data.push(song)        
-        })  
-        await SongModel.deleteMany();    
-        await SongModel.insertMany(data);
-        process.exit()
-    })
+    const uid = new ShortUniqueId({ length: 10 });
+    let data = []
+    SONGS.forEach(async song => {
+        song.id = uid()
+        data.push(song)        
+    })  
+    await SongModel.deleteMany();    
+    await SongModel.insertMany(data);
+    process.exit()
 }
 
 run();
