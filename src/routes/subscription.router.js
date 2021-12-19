@@ -11,6 +11,12 @@ const router = express.Router();
  * 
  * @apiBody {String} card_number Le numero de la carte
  * @apiBody {String} cvc Code de verification de la carte
+ * 
+ * @apiDescription Pour la subscription, on accepte
+ * que la carte VISA. D'après ce que j'ai compris
+ * l'utilisateur va s'abonner et au premier abonnement
+ * il n'a juste que 5 min pour essayer après faut réabonner pour
+ * en profiter plus.
  */
 router.put("/subscription", async(req, res) => {
     const { card_number, cvc } = req.body;

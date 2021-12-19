@@ -165,4 +165,28 @@ router.delete("/user", async(req, res) => {
     })
 })
 
+
+/**
+ * @api {post} /api/refreshToken Générer un nouveau Token
+ * @apiName RefreshToken
+ * @apiGroup User
+ * 
+ * @apiBody {String} refreshToken Le token d'actualisation
+ */
+router.post("/refreshToken", (req, res) => {
+    if(!req.body.refreshToken)
+        return res.status(400).json({ error:true, message:"Le refresh token est obligatoire." });
+    try{
+        const { id } = jwt.verify(req.body.refreshToken, process.env.JWT_SECRET);
+
+        return res.status(200).json({
+            token:jwt.sign({id}, process.env.JWT_SECRET, { expiresIn: TOKEN_LIFE }),
+            refreshToken:jwt.sign({id}, process.env.JWT_SECRET, { expiresIn: REFRESH_TOKEN_LIFE })
+        })
+    }catch(err){
+        return res.status(401).json({ error:true, message:"Token invalid" });
+    }
+    
+})
+
 export default router;

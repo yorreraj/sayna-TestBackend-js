@@ -48,7 +48,7 @@ app.use("/api",
 
             return done(null, !!blacklistedToken);
         }
-    }).unless({path:["/api/register", "/api/login"]})
+    }).unless({path:["/api/register", "/api/login", "/api/refreshToken"]})
 )
 app.use("/api", function(err, req, res, next) {
     if(err.name === 'UnauthorizedError') {
