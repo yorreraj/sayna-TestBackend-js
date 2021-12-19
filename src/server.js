@@ -36,8 +36,8 @@ app.use(bodyParser.json())
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended:true }))
 
-app.use(expressJWT({ secret: process.env.JWT_SECRET, algorithms: ['HS256']}).unless({path:["/register", "/login", "/", "/assets"]}))
-app.use(async (err, req, res, next) => {
+app.use("/api", expressJWT({ secret: process.env.JWT_SECRET, algorithms: ['HS256']}).unless({path:["/api/register", "api/login"]}))
+app.use("/api", async (err, req, res, next) => {
     if (err.name === 'UnauthorizedError') 
         return res.status(401).json({ "error": true, "message": "Votre token n'est pas correct" });
     else if(req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer'){
@@ -51,7 +51,7 @@ app.use(async (err, req, res, next) => {
 });
 
 //routes definitions
-app.use([userRouter, cardRouter, songRouter, subscriptionRouter])
+app.use("/api", [userRouter, cardRouter, songRouter, subscriptionRouter])
 //apidoc
 app.get('/',function(req,res){
     return res.sendFile(path.join(__dirname+'/apidoc/index.html'));
