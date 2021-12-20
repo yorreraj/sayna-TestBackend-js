@@ -20,5 +20,5 @@ Démarrer le projet
 
     npm start
 
-### Documentation de l'API
+## Documentation de l'API
 [Ici le lien vers la documentation](https://yorre-sayna-testbackend-js.herokuapp.com/)
